@@ -1,8 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { SlideWrapper } from '../layout/SlideWrapper';
-import { MessageCircle, ArrowRight, QrCode } from 'lucide-react';
+import { MessageCircle, ArrowRight } from 'lucide-react';
 
 const Discussion = () => {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyLink = async () => {
+    const url = 'https://KeenaNet.github.io/sinos-web-presentation/';
+    
+    if (!navigator.clipboard) {
+      const textArea = document.createElement("textarea");
+      textArea.value = url;
+      textArea.style.position = "fixed"; // Prevent scrolling to bottom
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      } catch (err) {
+        console.error('Fallback: Oops, unable to copy', err);
+      }
+      document.body.removeChild(textArea);
+      return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy link', err);
+    }
+  };
+
   return (
     <SlideWrapper className="items-center">
       <h2 className="text-5xl font-bold mb-4 text-center">Terima Kasih</h2>
@@ -39,13 +71,20 @@ const Discussion = () => {
         <div className="bg-gradient-to-br from-blue-900/50 to-indigo-900/50 border border-blue-500/50 p-8 rounded-3xl flex flex-col items-center justify-center text-center relative overflow-hidden group">
           <div className="absolute inset-0 bg-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
           
-          <QrCode className="w-32 h-32 text-white mb-6" />
+          <img 
+            src="https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=https://KeenaNet.github.io/sinos-web-presentation/" 
+            alt="QR Code" 
+            className="w-32 h-32 rounded-xl mb-6 bg-white p-2" 
+          />
           
           <h3 className="text-2xl font-bold mb-2">Coba Demo SINOS</h3>
           <p className="text-blue-200 mb-6 max-w-xs">Scan QR code untuk membuka web presentation ini di device Anda.</p>
           
-          <button className="bg-blue-600 hover:bg-blue-500 text-white px-6 py-2 rounded-full font-semibold transition-colors">
-            Copy Link
+          <button 
+            onClick={handleCopyLink}
+            className="bg-blue-600 hover:bg-blue-500 text-white px-6 py-2 rounded-full font-semibold transition-colors w-36"
+          >
+            {copied ? 'Copied!' : 'Copy Link'}
           </button>
         </div>
       </div>
