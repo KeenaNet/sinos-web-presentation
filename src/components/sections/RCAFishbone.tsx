@@ -1,81 +1,121 @@
 import React, { useState } from 'react';
 import { SlideWrapper } from '../layout/SlideWrapper';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Target } from 'lucide-react';
+import { Target, Users, Settings, Box, Cpu, BarChart3, Factory, ChevronDown } from 'lucide-react';
+import { Card, CardHeader, CardTitle, CardContent } from '../ui/card';
 
 const categories = [
-  { id: 'man', label: 'Man', items: ['Skill IT terbatas', 'Disiplin update data kurang'] },
-  { id: 'process', label: 'Process', items: ['Workflow belum terintegrasi', 'Filter data masih manual', 'Data ditarik/dikirim manual', 'Follow-up reaktif'] },
-  { id: 'material', label: 'Material', items: ['Lead time material lama', 'Safety stock tidak update'] },
-  { id: 'machine', label: 'Machine', items: ['Sistem SAP tidak real-time push ke user', 'Downtime mesin produksi tinggi karena part kosong'] },
-  { id: 'measurement', label: 'Measurement', items: ['KPI respon lambat', 'Monitoring reaktif'] },
-  { id: 'environment', label: 'Environment', items: ['Jarak warehouse dan line jauh', 'Lokasi rak tidak tertata standar'] }
+  { id: 'man', label: 'Man', icon: Users, color: 'text-blue-400', items: ['Admin mengejar update satu per satu', 'Follow-up bergantung pada admin', 'Respons PIC lintas departemen lambat'] },
+  { id: 'process', label: 'Process', icon: Settings, color: 'text-purple-400', items: ['Data ditarik, difilter & dikirim manual', 'Follow-up dilakukan setelah masalah muncul', 'Alur kerja masih manual', 'Format komunikasi tidak standar', 'Workflow belum terintegrasi', 'Rekap masih excel'] },
+  { id: 'material', label: 'Material', icon: Box, color: 'text-orange-400', items: ['Update stock belum cepat', 'Tindakan MRP terlambat', 'Material critical belum diprioritaskan'] },
+  { id: 'machine', label: 'Machine', icon: Cpu, color: 'text-emerald-400', items: ['Belum ada reminder otomatis', 'SAP, stok aktual, dan rekap manual belum sinkron', 'Data masih terpisah di SAP dan Excel', 'Follow-up belum terkoneksi'] },
+  { id: 'measurement', label: 'Measurement', icon: BarChart3, color: 'text-rose-400', items: ['Transaksi GI belum termonitoring', 'Hasil MRP belum menjadi actions list prioritas', 'Belum ada alert yang melewati batas aging', 'Aging Pending GI/MRP belum terpantau', 'Akurasi data belum tervalidasi rutin'] },
+  { id: 'environment', label: 'Environment', icon: Factory, color: 'text-cyan-400', items: ['Rekap dari banyak sumber data', 'Update antar departemen tidak seragam', 'Data tersebar', 'Komunikasi masih reaktif'] }
 ];
 
 const RCAFishbone = () => {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1 }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: { y: 0, opacity: 1, transition: { type: 'spring', stiffness: 100 } }
+  };
+
   return (
     <SlideWrapper>
-      <div className="mb-12 text-center">
+      <div className="mb-8 text-center">
         <h2 className="text-4xl font-bold mb-4">Root Cause Analysis</h2>
-        <p className="text-xl text-slate-400">Mengapa operasional warehouse berjalan suboptimal?</p>
+        <p className="text-xl text-slate-400">Inefisiensi biaya operasional & keterlambatan tindakan stok/MRP manual</p>
       </div>
 
-      <div className="relative w-full max-w-5xl mx-auto h-[500px] flex items-center justify-center">
-        {/* Main Spine */}
-        <div className="absolute w-full h-2 bg-slate-600 rounded flex items-center justify-end z-0">
-          <div className="translate-x-4 bg-alert/20 border border-alert text-alert font-bold p-4 rounded-xl shadow-lg shadow-alert/10 whitespace-nowrap">
-            <Target className="inline-block mr-2" />
-            Stock Out & Pending GI Tinggi
-          </div>
-        </div>
+      <div className="max-w-7xl mx-auto flex flex-col items-center gap-8 h-full">
+        {/* Core Problem */}
+        <motion.div 
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          className="bg-alert/10 border-2 border-alert text-alert font-bold px-8 py-4 rounded-2xl shadow-lg shadow-alert/10 text-2xl flex items-center gap-4 text-center max-w-4xl leading-relaxed"
+        >
+          <Target className="w-8 h-8 flex-shrink-0" />
+          Ketergantungan tinggi pada proses manual, monitoring belum otomatis, visibilitas rendah, dan komunikasi reaktif
+        </motion.div>
 
-        {/* Ribs / Categories */}
-        <div className="absolute inset-0 grid grid-cols-3 grid-rows-2 z-10 w-[75%] gap-x-8">
-          {categories.map((cat, idx) => {
-            const isTop = idx < 3;
+        {/* 6M Grid */}
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full px-4"
+        >
+          {categories.map((cat) => {
+            const Icon = cat.icon;
             const isActive = activeCategory === cat.id;
+
             return (
-              <div key={cat.id} className={`relative flex flex-col ${isTop ? 'justify-end pb-8 border-b-2' : 'justify-start pt-8 border-t-2'} border-slate-600/50 items-center -skew-x-[20deg]`}>
-                <button
+              <motion.div key={cat.id} variants={itemVariants}>
+                <Card 
+                  className={`relative overflow-hidden cursor-pointer transition-all duration-300 ${
+                    isActive 
+                      ? 'ring-2 ring-blue-500 bg-slate-800 scale-105 z-10' 
+                      : 'hover:bg-slate-700 hover:border-slate-500 hover:-translate-y-1'
+                  }`}
                   onClick={() => setActiveCategory(isActive ? null : cat.id)}
-                  className={`skew-x-[20deg] px-6 py-3 rounded-lg font-bold text-lg transition-all duration-300 w-40 text-center
-                    ${isActive 
-                      ? 'bg-blue-600 text-white shadow-[0_0_20px_rgba(37,99,235,0.5)] scale-110 z-20' 
-                      : 'bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white border border-slate-700'
-                    }
-                  `}
                 >
-                  {cat.label}
-                </button>
-                
-                <AnimatePresence>
-                  {isActive && (
+                  <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
+                    <CardTitle className="text-xl flex items-center gap-3">
+                      <div className={`p-2 rounded-lg bg-slate-900/50 ${cat.color}`}>
+                        <Icon className="w-6 h-6" />
+                      </div>
+                      {cat.label}
+                    </CardTitle>
                     <motion.div
-                      initial={{ opacity: 0, y: isTop ? 10 : -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: isTop ? 10 : -10 }}
-                      className={`absolute skew-x-[20deg] z-30 w-64 bg-slate-900 border border-blue-500/50 rounded-xl p-4 shadow-2xl shadow-black/50 ${isTop ? 'bottom-[120%]' : 'top-[120%]'}`}
+                      animate={{ rotate: isActive ? 180 : 0 }}
+                      transition={{ duration: 0.2 }}
                     >
-                      <ul className="list-disc pl-4 text-left space-y-2 text-sm text-blue-100">
-                        {cat.items.map((item, i) => (
-                          <li key={i}>{item}</li>
-                        ))}
-                      </ul>
-                      <button 
-                        onClick={(e) => { e.stopPropagation(); setActiveCategory(null); }}
-                        className="mt-4 text-xs text-slate-400 hover:text-white w-full text-center"
-                      >
-                        Tutup
-                      </button>
+                      <ChevronDown className="w-5 h-5 text-slate-500" />
                     </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
+                  </CardHeader>
+                  <AnimatePresence>
+                    {isActive && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                        className="overflow-hidden"
+                      >
+                        <CardContent className="pt-4">
+                          <ul className="space-y-3">
+                            {cat.items.map((item, idx) => (
+                              <motion.li 
+                                key={idx}
+                                initial={{ x: -10, opacity: 0 }}
+                                animate={{ x: 0, opacity: 1 }}
+                                transition={{ delay: 0.1 + idx * 0.1 }}
+                                className="flex items-start gap-2 text-slate-300 text-sm bg-slate-900/40 p-2.5 rounded-lg border border-slate-700/50"
+                              >
+                                <span className="w-1.5 h-1.5 mt-1.5 rounded-full bg-blue-500 flex-shrink-0" />
+                                <span>{item}</span>
+                              </motion.li>
+                            ))}
+                          </ul>
+                        </CardContent>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </Card>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </SlideWrapper>
   );

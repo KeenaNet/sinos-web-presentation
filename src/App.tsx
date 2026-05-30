@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { AnimatePresence } from 'framer-motion';
 
 import Opening from './components/sections/Opening';
+import TeamGovernance from './components/sections/TeamGovernance';
 import CurrentStatus from './components/sections/CurrentStatus';
 import RCAFishbone from './components/sections/RCAFishbone';
 import Solution from './components/sections/Solution';
@@ -10,6 +11,7 @@ import Workflow from './components/sections/Workflow';
 import ChatbotDemo from './components/sections/ChatbotDemo';
 import Evidence from './components/sections/Evidence';
 import KPIDashboard from './components/sections/KPIDashboard';
+import KPIDashboard2 from './components/sections/KPIDashboard2';
 import ROI from './components/sections/ROI';
 import Roadmap from './components/sections/Roadmap';
 import Standardization from './components/sections/Standardization';
@@ -17,6 +19,7 @@ import Discussion from './components/sections/Discussion';
 
 const slides = [
   { id: 'opening', component: Opening },
+  { id: 'team-governance', component: TeamGovernance },
   { id: 'current-status', component: CurrentStatus },
   { id: 'rca', component: RCAFishbone },
   { id: 'solution', component: Solution },
@@ -25,6 +28,7 @@ const slides = [
   { id: 'chatbot', component: ChatbotDemo },
   { id: 'evidence', component: Evidence },
   { id: 'kpi', component: KPIDashboard },
+  { id: 'kpi-2', component: KPIDashboard2 },
   { id: 'roi', component: ROI },
   { id: 'roadmap', component: Roadmap },
   { id: 'standardization', component: Standardization },
