@@ -1,0 +1,47 @@
+[
+  {
+    "id": "recap_time",
+    "label": "Waktu Rekap",
+    "before": "90–120 menit",
+    "after": "10–20 menit",
+    "improvement": "↓ 80–90%",
+    "category": "Kecepatan",
+    "sourceLabel": "estimate"
+  },
+  {
+    "id": "pending_gi",
+    "label": "Pending GI >24 Jam",
+    "before": "18",
+    "after": "5–8",
+    "improvement": "↓ 55–72%",
+    "category": "Reliabilitas",
+    "sourceLabel": "estimate"
+  },
+  {
+    "id": "stockout",
+    "label": "Stockout",
+    "before": "6–10",
+    "after": "2–4",
+    "improvement": "↓ 35–60%",
+    "category": "Reliabilitas",
+    "sourceLabel": "estimate"
+  },
+  {
+    "id": "expedite",
+    "label": "Expedite",
+    "before": "8–12",
+    "after": "4–7",
+    "improvement": "↓ 25–40%",
+    "category": "Biaya",
+    "sourceLabel": "estimate"
+  },
+  {
+    "id": "part_search",
+    "label": "Waktu Cari Part",
+    "before": "10–15 menit",
+    "after": "<10 detik",
+    "improvement": "↓ >90%",
+    "category": "Kecepatan",
+    "sourceLabel": "estimate"
+  }
+]

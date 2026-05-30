@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "rootCause": "Rekap manual",
+    "improvement": "Implementasi SINOS berbasis n8n + Supabase",
+    "pic": "IT",
+    "target": "Minggu 1–2",
+    "priority": "Tinggi"
+  },
+  {
+    "id": 2,
+    "rootCause": "Tidak ada notifikasi",
+    "improvement": "WhatsApp Gateway untuk alert otomatis",
+    "pic": "IT",
+    "target": "Minggu 2",
+    "priority": "Tinggi"
+  },
+  {
+    "id": 6,
+    "rootCause": "Pencarian lama",
+    "improvement": "SSKA chatbot untuk pencarian sparepart",
+    "pic": "IT",
+    "target": "Minggu 4",
+    "priority": "Sedang"
+  }
+]

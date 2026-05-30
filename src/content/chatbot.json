@@ -1,0 +1,20 @@
+[
+  {
+    "question": "Cari stok bearing 6205",
+    "response": {
+      "material": "Bearing 6205",
+      "description": "Bearing standard motor",
+      "stock": "12 pcs",
+      "location": "Rack B-03",
+      "status": "SAFE",
+      "lastUpdate": "Hari ini 08:00"
+    }
+  },
+  {
+    "question": "Part critical hari ini apa saja?",
+    "response": {
+      "summary": "3 item critical, 5 item warning",
+      "action": "Prioritaskan follow-up MRP dan pending GI"
+    }
+  }
+]

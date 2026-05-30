@@ -1,0 +1,11 @@
+{
+  "capexIdr": 2375000,
+  "opexMonthlyIdr": 300000,
+  "opexAnnualIdr": 3600000,
+  "operationalBenefitMonthlyIdr": 7903000,
+  "operationalBenefitAnnualIdr": 94836000,
+  "downtimeSavingAnnualIdr": 23220164,
+  "netSavingAnnualIdr": 112081164,
+  "waterfallFormula": "94836000 + 23220164 - 2375000 - 3600000 = 112081164",
+  "displayNote": "Angka mengikuti deck SINOS; validasi final — OQ-02"
+}
