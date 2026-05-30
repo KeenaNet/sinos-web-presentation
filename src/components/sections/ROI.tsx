@@ -27,7 +27,7 @@ const ROI = () => {
         <p className="text-xl text-slate-400">Business case dan estimasi Net Saving per tahun</p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto w-full h-[450px]">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto w-full lg:h-[450px]">
         {/* Left Side: Formula View */}
         <div className="flex flex-col gap-4">
           <Card className="bg-slate-800/80 border-slate-700 h-full flex flex-col justify-center shadow-lg">

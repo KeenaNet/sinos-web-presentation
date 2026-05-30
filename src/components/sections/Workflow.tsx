@@ -7,7 +7,7 @@ import { Card, CardContent } from '../ui/card';
 const steps = [
   { id: 'source', label: 'Data Source', icon: <FileSpreadsheet className="w-8 h-8" />, desc: 'Email / SAP / Excel' },
   { id: 'n8n', label: 'Processing', icon: <RefreshCw className="w-8 h-8" />, desc: 'n8n Automation' },
-  { id: 'db', label: 'Storage', icon: <Server className="w-8 h-8" />, desc: 'PostgreSQL' },
+  { id: 'db', label: 'Database', icon: <Server className="w-8 h-8" />, desc: 'PostgreSQL' },
   { id: 'alert', label: 'Notification', icon: <MessageSquare className="w-8 h-8" />, desc: 'WhatsApp & Email' }
 ];
 

@@ -39,6 +39,11 @@ function App() {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
 
+  // Swipe gesture states
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  const minSwipeDistance = 50;
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
@@ -67,11 +72,39 @@ function App() {
     }
   };
 
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEndHandler = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+    
+    if (isLeftSwipe) {
+      setCurrentSlideIndex((prev) => Math.min(prev + 1, slides.length - 1));
+    }
+    if (isRightSwipe) {
+      setCurrentSlideIndex((prev) => Math.max(prev - 1, 0));
+    }
+  };
+
   const CurrentSlide = slides[currentSlideIndex].component;
   const progressPercentage = ((currentSlideIndex + 1) / slides.length) * 100;
 
   return (
-    <div className="w-screen h-screen bg-slate-900 text-white flex flex-col relative overflow-hidden">
+    <div 
+      className="w-screen h-screen bg-slate-900 text-white flex flex-col relative overflow-hidden"
+      onTouchStart={onTouchStart}
+      onTouchMove={onTouchMove}
+      onTouchEnd={onTouchEndHandler}
+    >
       {/* Top Bar for Presentation Mode */}
       <div className="absolute top-4 right-4 z-50 flex gap-2">
         <button 

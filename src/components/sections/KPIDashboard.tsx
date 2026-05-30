@@ -45,7 +45,7 @@ const KPIDashboard = () => {
         <p className="text-xl text-slate-400">Dampak Operasional: Kecepatan Proses (Baseline vs Target/Estimasi)</p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 w-full max-w-6xl mx-auto h-[500px]">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 w-full max-w-6xl mx-auto lg:h-[500px]">
         
         {/* Left Column: Highlight Cards */}
         <div className="flex flex-col gap-4">
