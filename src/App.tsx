@@ -100,7 +100,7 @@ function App() {
 
   return (
     <div 
-      className="w-screen h-screen bg-slate-900 text-white flex flex-col relative overflow-hidden"
+      className="w-screen h-[100dvh] bg-slate-900 text-white flex flex-col relative overflow-hidden"
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEndHandler}

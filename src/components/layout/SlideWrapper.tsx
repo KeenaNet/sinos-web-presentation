@@ -20,7 +20,7 @@ export const SlideWrapper: React.FC<SlideWrapperProps> = ({ children, className 
       animate="animate"
       exit="exit"
       transition={{ duration: 0.5, ease: "easeInOut" }}
-      className={`w-full max-w-6xl mx-auto px-4 md:px-8 py-6 md:py-12 flex flex-col justify-center h-full overflow-y-auto ${className}`}
+      className={`w-full max-w-6xl mx-auto px-4 md:px-8 py-6 md:py-12 flex flex-col md:justify-center h-full overflow-y-auto ${className}`}
     >
       {children}
     </motion.div>

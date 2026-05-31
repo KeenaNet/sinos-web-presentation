@@ -85,15 +85,13 @@ const KPIDashboard2 = () => {
           <Card className="bg-slate-800/80 border-slate-700 flex-1 flex flex-col p-6 shadow-lg">
             <h3 className="text-xl font-bold mb-6 text-slate-200">Grafik Penurunan Kasus</h3>
             
-            <div className="overflow-x-auto pb-4">
-              <div className="flex-1 flex flex-col relative mt-4 min-w-[500px] md:min-w-0">
-              {/* Chart Area (Grid + Bars) */}
-              <div className="flex-1 relative flex items-end justify-evenly pt-10 pb-2 ml-8">
+            <div className="flex-1 overflow-x-auto w-full">
+              <div className="flex-1 flex items-end justify-around pb-6 pt-10 relative px-4 min-w-[600px] md:min-w-full h-[280px]">
                 {/* Y Axis Grid Lines */}
-                <div className="absolute inset-0 flex flex-col justify-between pointer-events-none pt-10">
+                <div className="absolute inset-0 flex flex-col justify-between pointer-events-none pb-6 pt-10 px-4">
                   {[0, 1, 2, 3, 4].map(i => (
                     <div key={i} className="border-b border-slate-700/50 w-full relative">
-                      <span className="absolute -left-8 -translate-y-1/2 text-xs text-slate-500">
+                      <span className="absolute -left-2 md:-left-6 -translate-y-1/2 text-[10px] text-slate-500">
                         {Math.round(maxCountValue - (i * maxCountValue / 4))}
                       </span>
                     </div>
@@ -106,48 +104,45 @@ const KPIDashboard2 = () => {
                   const afterVal = parseValue(kpi.after);
                   
                   return (
-                    <div key={kpi.id} className="relative flex items-end justify-center gap-2 md:gap-3 h-full z-10 flex-1">
-                      {/* Before Bar */}
-                      <div className="relative group w-8 sm:w-10 md:w-12 flex items-end justify-center h-full">
-                        <motion.div 
-                          initial={{ height: 0 }}
-                          animate={{ height: `${Math.max(2, (beforeVal / maxCountValue) * 100)}%` }}
-                          transition={{ duration: 1, delay: 0.5 + (idx * 0.2) }}
-                          className="w-full bg-slate-600 rounded-t-md hover:bg-slate-500 transition-colors"
-                        >
-                          <div className="absolute -top-8 left-1/2 -translate-x-1/2 text-[10px] md:text-xs font-bold text-slate-300 whitespace-nowrap">
-                            {kpi.before}
-                          </div>
-                        </motion.div>
-                      </div>
+                    <div key={kpi.id} className="relative flex flex-col items-center gap-2 z-10 w-24">
+                      <div className="flex gap-2 h-[180px] items-end justify-center w-full">
+                        {/* Before Bar */}
+                        <div className="relative group w-8 md:w-10 flex items-end justify-center h-full">
+                          <motion.div 
+                            initial={{ height: 0 }}
+                            animate={{ height: `${Math.max(2, (beforeVal / maxCountValue) * 100)}%` }}
+                            transition={{ duration: 1, delay: 0.5 + (idx * 0.2) }}
+                            className="w-full bg-slate-600 rounded-t-md hover:bg-slate-500 transition-colors"
+                          >
+                            <div className="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-bold text-slate-300 whitespace-nowrap">
+                              {kpi.before}
+                            </div>
+                          </motion.div>
+                        </div>
 
-                      {/* After Bar */}
-                      <div className="relative group w-8 sm:w-10 md:w-12 flex items-end justify-center h-full">
-                        <motion.div 
-                          initial={{ height: 0 }}
-                          animate={{ height: `${Math.max(2, (afterVal / maxCountValue) * 100)}%` }}
-                          transition={{ duration: 1, delay: 0.8 + (idx * 0.2) }}
-                          className="w-full bg-blue-500 rounded-t-md hover:bg-blue-400 transition-colors"
-                        >
-                          <div className="absolute -top-8 left-1/2 -translate-x-1/2 text-[10px] md:text-xs font-bold text-blue-300 whitespace-nowrap">
-                            {kpi.after}
-                          </div>
-                        </motion.div>
+                        {/* After Bar */}
+                        <div className="relative group w-8 md:w-10 flex items-end justify-center h-full">
+                          <motion.div 
+                            initial={{ height: 0 }}
+                            animate={{ height: `${Math.max(2, (afterVal / maxCountValue) * 100)}%` }}
+                            transition={{ duration: 1, delay: 0.8 + (idx * 0.2) }}
+                            className="w-full bg-blue-500 rounded-t-md hover:bg-blue-400 transition-colors"
+                          >
+                            <div className="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-bold text-blue-300 whitespace-nowrap">
+                              {kpi.after}
+                            </div>
+                          </motion.div>
+                        </div>
+                      </div>
+                      
+                      {/* X Axis Label */}
+                      <div className="text-center mt-2 h-12 flex flex-col justify-start">
+                        <span className="text-[11px] font-semibold block text-slate-300 leading-tight">{kpi.label}</span>
+                        <span className="text-[10px] text-success font-bold mt-1 block">{kpi.improvement}</span>
                       </div>
                     </div>
                   );
                 })}
-              </div>
-
-              {/* X Axis Area */}
-              <div className="flex justify-evenly mt-4 ml-8">
-                {countMetrics.map((kpi) => (
-                  <div key={kpi.id} className="flex-1 px-1 text-center flex flex-col justify-start">
-                    <span className="text-xs md:text-sm font-semibold block text-slate-300 whitespace-normal leading-tight">{kpi.label}</span>
-                    <span className="text-[10px] md:text-xs text-success font-bold mt-1 block">{kpi.improvement}</span>
-                  </div>
-                ))}
-              </div>
               </div>
             </div>
             
