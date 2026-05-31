@@ -87,11 +87,12 @@ const KPIDashboard = () => {
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="lg:col-span-2 flex flex-col gap-6">
           <Card className="bg-slate-800/80 border-slate-700 flex-1 flex flex-col p-6 shadow-lg">
             <h3 className="text-xl font-bold mb-6 text-slate-200">Grafik Kecepatan Proses (Menit)</h3>
-                     <div className="flex-1 flex flex-col relative mt-4">
+            <div className="overflow-x-auto pb-4">
+              <div className="flex-1 flex flex-col relative mt-4 min-w-[500px] md:min-w-0">
               {/* Chart Area (Grid + Bars) */}
-              <div className="flex-1 relative flex items-end justify-evenly pt-6 pb-2 ml-8">
+              <div className="flex-1 relative flex items-end justify-evenly pt-10 pb-2 ml-8">
                 {/* Y Axis Grid Lines */}
-                <div className="absolute inset-0 flex flex-col justify-between pointer-events-none pt-6">
+                <div className="absolute inset-0 flex flex-col justify-between pointer-events-none pt-10">
                   {[0, 1, 2, 3, 4].map(i => (
                     <div key={i} className="border-b border-slate-700/50 w-full relative">
                       <span className="absolute -left-8 -translate-y-1/2 text-xs text-slate-500">
@@ -148,6 +149,7 @@ const KPIDashboard = () => {
                     <span className="text-[10px] md:text-xs text-success font-bold mt-1 block">{kpi.improvement}</span>
                   </div>
                 ))}
+              </div>
               </div>
             </div>
             
