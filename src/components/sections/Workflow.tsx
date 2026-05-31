@@ -34,14 +34,25 @@ const Workflow = () => {
         <p className="text-xl text-slate-400">Alur data dan notifikasi dalam sistem SINOS</p>
       </div>
 
-      <div className="w-full max-w-5xl flex items-center justify-between relative mt-12 mb-16">
+      <div className="w-full max-w-5xl flex flex-col md:flex-row items-center justify-between gap-12 md:gap-0 relative mt-12 mb-16">
         
-        {/* Background Line */}
-        <div className="absolute top-10 left-[5%] right-[5%] h-1 bg-slate-800 -translate-y-1/2 z-0"></div>
+        {/* Mobile Background Line */}
+        <div className="block md:hidden absolute left-1/2 top-10 bottom-10 w-1 bg-slate-800 -translate-x-1/2 z-0"></div>
 
-        {/* Animated Progress Line */}
+        {/* Mobile Animated Progress Line */}
         <motion.div 
-          className="absolute top-10 left-[5%] h-1 bg-blue-500 -translate-y-1/2 z-0"
+          className="block md:hidden absolute left-1/2 top-10 w-1 bg-blue-500 -translate-x-1/2 z-0"
+          initial={{ height: '0%' }}
+          animate={{ height: `${(Math.max(0, activeStep - 1) / (steps.length - 1)) * 90}%` }}
+          transition={{ duration: 0.5, ease: 'easeInOut' }}
+        ></motion.div>
+
+        {/* Desktop Background Line */}
+        <div className="hidden md:block absolute top-10 left-[5%] right-[5%] h-1 bg-slate-800 -translate-y-1/2 z-0"></div>
+
+        {/* Desktop Animated Progress Line */}
+        <motion.div 
+          className="hidden md:block absolute top-10 left-[5%] h-1 bg-blue-500 -translate-y-1/2 z-0"
           initial={{ width: '0%' }}
           animate={{ width: `${(Math.max(0, activeStep - 1) / (steps.length - 1)) * 90}%` }}
           transition={{ duration: 0.5, ease: 'easeInOut' }}
