@@ -117,7 +117,7 @@ function App() {
       </div>
 
       {/* Main Slide Content */}
-      <div className="flex-1 flex items-center justify-center relative">
+      <div className="flex-1 flex justify-center relative overflow-hidden">
         <AnimatePresence mode="wait">
           <CurrentSlide key={currentSlideIndex} />
         </AnimatePresence>
